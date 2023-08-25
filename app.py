@@ -25,9 +25,10 @@ def render_content_listdict(key, listdict):
     st.selectbox("Select the display item", ["summary", "sheet", *listdict[0]], index=0, key=state_key, label_visibility="visible")
     display = st.session_state[state_key]
     if display == "summary":
-        summary = df.describe(percentiles=[0.5])
+        summary = df.describe(percentiles=None)
         cols = [c for c in summary.columns]
-        indexs = [i for i in summary.index if i is not 'count']
+        indexs = [i for i in summary.index if i not in ['count', 'std']]
+        print(indexs)
         values = summary.values
         is_render_each = st.checkbox("show each graph", False)
         if is_render_each:
@@ -35,7 +36,8 @@ def render_content_listdict(key, listdict):
                 st.text(idx_key)
                 st.area_chart(summary.T.get(idx_key))
         else:
-            st.line_chart(summary.T.get(indexs))
+            _item = st.multiselect("", options=indexs, default=indexs)
+            st.line_chart(summary.T.get(_item))
             st.dataframe(summary)
 
     elif display == "sheet":

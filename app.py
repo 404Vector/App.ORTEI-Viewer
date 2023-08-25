@@ -28,7 +28,6 @@ def render_content_listdict(key, listdict):
         summary = df.describe(percentiles=None)
         cols = [c for c in summary.columns]
         indexs = [i for i in summary.index if i not in ['count', 'std']]
-        print(indexs)
         values = summary.values
         is_render_each = st.checkbox("show each graph", False)
         if is_render_each:

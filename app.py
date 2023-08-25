@@ -5,9 +5,8 @@ import pandas as pd
 import numpy as np
 import json
 
-def convert_jsonbuffer2dict(json_buffer:BytesIO | None) -> dict | None:
-    if json_buffer == None:
-        return None
+def convert_jsonbuffer2dict(json_buffer:BytesIO) -> dict:
+    assert json_buffer != None
     buffer:bytes = json_buffer.getvalue()
     return json.loads(buffer)
 

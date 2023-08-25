@@ -37,8 +37,9 @@ def render_content_listdict(key, listdict):
                 st.area_chart(summary.T.get(idx_key))
         else:
             _item = st.multiselect("", options=indexs, default=indexs)
-            st.line_chart(summary.T.get(_item))
-            st.dataframe(summary)
+            _data = summary.T.get(_item)
+            st.line_chart(_data)
+            st.dataframe(_data, use_container_width=True)
 
     elif display == "sheet":
         st.dataframe(df)

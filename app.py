@@ -37,6 +37,7 @@ def render_content_listdict(key, listdict):
                 st.area_chart(summary.T.get(idx_key))
         else:
             st.line_chart(summary.T.get(indexs))
+            st.dataframe(summary)
 
     elif display == "sheet":
         st.dataframe(df)
